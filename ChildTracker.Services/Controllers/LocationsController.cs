@@ -14,7 +14,7 @@ namespace ChildTracker.Services.Controllers
     using System.Net.Http;
     using System.Web.Http;
 
-    //[Authorize]
+    [Authorize]
     public class LocationsController : ApiController
     {
         protected IChildTrackerData data;
@@ -32,7 +32,10 @@ namespace ChildTracker.Services.Controllers
         [HttpGet]
         public IHttpActionResult GetLocation()
         {
+            var userId = this.User.Identity.GetUserId();
+
             var lastLocation = this.data.Locations.All()
+                            .Where(l => l.UserID == userId)
                             .OrderByDescending(l => l.CreatedOn)
                             .FirstOrDefault();
 
@@ -48,7 +51,10 @@ namespace ChildTracker.Services.Controllers
         [HttpGet]
         public IHttpActionResult GetLocation(int id)
         {
+            var userId = this.User.Identity.GetUserId();
+
             var location = this.data.Locations.All()
+                .Where(l => l.UserID == userId)
                 .FirstOrDefault(l => l.ID == id);
 
             if (location == null)

@@ -21,7 +21,7 @@
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             
             //TODO: REMOVE AFTER FIXING ERRORS
-            GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+            //GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
